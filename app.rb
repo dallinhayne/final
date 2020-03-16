@@ -15,8 +15,11 @@ after { puts; }                                                                 
 #######################################################################################
 
 # put your API credentials here (found on your Twilio dashboard)
-account_sid = "AC027d88dda5af03e1732f895465dc6273"
-auth_token = "262928649d372bca4224d57ba449a6d9"
+# account_sid = "AC027d88dda5af03e1732f895465dc6273"
+# auth_token = "262928649d372bca4224d57ba449a6d9"
+
+# Dark Sky API
+# ForecastIO.api_key = "ab3fcb9996e6bdbb5bf3ca59bde5a725"
 
 # set up a client to talk to the Twilio REST API
 
@@ -41,7 +44,7 @@ end
 get "/" do
     puts "params: #{params}"
 
-    pp loactions_table.all.to_a
+    pp locations_table.all.to_a
     @locations = locations_table.all.to_a
     view "locations"
 end

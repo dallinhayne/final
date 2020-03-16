@@ -18,13 +18,50 @@
     <!-- Your own CSS -->
     <link rel="stylesheet" href="/styles.css">
 
-    <title>Hello world!</title>
+    <title>Centers for Autism and Behavioral Disorders</title>
   </head>
+  
   <body>
 
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="/">Guiding Behaviors</a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <% if @current_user %>
+                    <li class="navbar-text">
+                        Logged in as <%= @current_user[:name] %>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/logout" class="nav-link">Logout</a>
+                    </li>
+                <% else %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/new">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logins/new">Sign In</a>
+                    </li>
+                <% end %>
+            </ul>
+        </div>
+    </nav>
+
     <div class="container mt-5">
-      <%= %>
+      <%= yield %>
     </div>
+ </p>  
+      <iframe
+        width="600"
+        height="450"
+        frameborder="0" style="border:0"
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCtovsQvkIUWlNqtYwXY87gEd4ZSmJEhMw
+          &q=<%= @lat %>,<%= @long %>&zoom=6" allowfullscreen>
+      </iframe>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

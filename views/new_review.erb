@@ -1,20 +1,35 @@
 <h2>
-    <i class="far fa-calendar-alt"></i>
+    <i class="fas fa-map-pin"></i>
     <%= @location[:date] %>
 </h2>
-<h1>RSVP for <%= @location[:title] %></h1>
+<h1>Leave a review for <%= @location[:title] %></h1>
 
 <form action="/locations/<%= @location[:id] %>/reviews/create" method="post">
   <div class="form-group">
-    <label>Are you going?</label>
+    <label>Is this location in your home region?</label>
     <select class="form-control" name="going">
       <option value="1">Yes</option>
       <option value="0">No</option>
     </select>
   </div>
 
+   <div class="form-group">
+    <label>What was the reason for your visit to one of our centers?</label>
+<div class="custom-control custom-radio">
+  <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+  <label class="custom-control-label" for="customRadio1">Seeking care for my child</label>
+</div>
+<div class="custom-control custom-radio">
+  <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+  <label class="custom-control-label" for="customRadio2">Seeking care for a friend / family member</label>
+</div>
+<div class="custom-control custom-radio">
+  <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+  <label class="custom-control-label" for="customRadio3">Exploring care options</label>
+</div>
+<p></p>
   <div class="form-group">
-    <label>Comments</label>
+    <label>Leave us a review!</label>
     <textarea class="form-control" rows="3" name="comments"></textarea>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>

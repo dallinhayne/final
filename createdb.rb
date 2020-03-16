@@ -9,7 +9,7 @@ DB.create_table! :locations do
   primary_key :id
   String :title
   String :description, text: true
-  String :date
+  String :average_rating
   String :location
 end
 DB.create_table! :reviews do
@@ -29,14 +29,14 @@ end
 # Insert initial (seed) data
 locations_table = DB.from(:locations)
 
-locations_table.insert(title: "Bacon Burger Taco Fest", 
-                    description: "Here we go again bacon burger taco fans, another Bacon Burger Taco Fest is here!",
-                    date: "June 21",
-                    location: "Kellogg Global Hub")
+locations_table.insert(title: "Las Vegas Center for Autism", 
+                    description: "Our flagship location specializes in care for autistic children and teenagers.",
+                    average_rating: "4.5/5.0 stars",
+                    location: "2142 Lake Mead Blvd Las Vegas, NV 84902")
 
-locations_table.insert(title: "Kaleapolooza", 
-                    description: "If you're into nutrition and vitamins and stuff, this is the event for you.",
-                    date: "July 4",
-                    location: "Nowhere")
+locations_table.insert(title: "San Diego Center for Behavioral Therapy", 
+                    description: "Our SD location is our largest, with capacity for 100 students.",
+                    average_rating: "4.8/5.0 stars",
+                    location: "808 Beach Dr San Diego, CA 92119")
 
 puts "Success!"

@@ -2,7 +2,8 @@
 require "sinatra"                                                                     #
 require "sinatra/reloader" if development?                                            #
 require "sequel"                                                                      #
-require "logger"                                                                      #
+require "logger" 
+require "geocoder"                                                                     #
 require "twilio-ruby"                                                                 #
 require "bcrypt"                                                                      #
 connection_string = ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/development.sqlite3"  #
@@ -15,17 +16,18 @@ after { puts; }                                                                 
 #######################################################################################
 
 # put your API credentials here (found on your Twilio dashboard)
-# account_sid = "AC027d88dda5af03e1732f895465dc6273"
-# auth_token = "262928649d372bca4224d57ba449a6d9"
-
-# Dark Sky API
-# ForecastIO.api_key = "ab3fcb9996e6bdbb5bf3ca59bde5a725"
+account_sid = "AC027d88dda5af03e1732f895465dc6273"
+auth_token = "e1da808329a04d843c3dcb80ecb0049d"
 
 # set up a client to talk to the Twilio REST API
 
+    
+client = Twilio::REST::Client.new(account_sid,auth_token)
 
 # send the SMS from your trial Twilio number to your verified non-Twilio number
 
+# Dark Sky API
+# ForecastIO.api_key = "ab3fcb9996e6bdbb5bf3ca59bde5a725"
 locations_table = DB.from(:locations)
 reviews_table = DB.from(:reviews)
 users_table = DB.from(:users)
@@ -34,11 +36,6 @@ before do
     @current_user = users_table.where(id: session["user_id"]).to_a[0]
 end
 
-get '/send_text' do
-    account_sid= ENV["TWILIO_ACCOUNT_SID"]
-    # auth_token =""
-
-end 
 
 # homepage and list of events (aka "index")
 get "/" do
@@ -47,6 +44,7 @@ get "/" do
     pp locations_table.all.to_a
     @locations = locations_table.all.to_a
     view "locations"
+
 end
 
 # event details (aka "show")
@@ -58,6 +56,14 @@ get "/locations/:id" do
     pp @location
     @reviews = reviews_table.where(location_id: @location[:id]).to_a
     @going_count = reviews_table.where(location_id: @location[:id], going: true).count
+    
+    results = Geocoder.search(@location[:address])
+
+    lat_long = results.first.coordinates # => [lat,long]
+    @lat = lat_long[0]
+    @long = lat_long[1]
+    
+    
     view "location"
 end
 
@@ -82,7 +88,13 @@ post "/locations/:id/reviews/create" do
         comments: params["comments"],
         going: params["going"]
     )
+      client.messages.create(
+ from: "+12064663374", 
+ to: "+18584723202",
+ body: "Thanks for leaving us a review!"
+)
     redirect "locations/#{@location[:id]}"
+  
 end
 
 get "/reviews/:id/edit" do

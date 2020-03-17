@@ -10,7 +10,7 @@ DB.create_table! :locations do
   String :title
   String :description, text: true
   String :average_rating
-  String :location
+  String :address
 end
 DB.create_table! :reviews do
   primary_key :id
@@ -32,11 +32,11 @@ locations_table = DB.from(:locations)
 locations_table.insert(title: "Las Vegas Center for Autism", 
                     description: "Our flagship location specializes in care for autistic children and teenagers.",
                     average_rating: "4.5/5.0 stars",
-                    location: "2142 Lake Mead Blvd Las Vegas, NV 84902")
+                    address: "2142 Lake Mead Blvd Las Vegas, NV 84902")
 
 locations_table.insert(title: "San Diego Center for Behavioral Therapy", 
                     description: "Our SD location is our largest, with capacity for 100 students.",
                     average_rating: "4.8/5.0 stars",
-                    location: "808 Beach Dr San Diego, CA 92119")
+                    address: "808 Beach Dr San Diego, CA 92119")
 
 puts "Success!"

@@ -16,8 +16,8 @@ after { puts; }                                                                 
 #######################################################################################
 
 # put your API credentials here (found on your Twilio dashboard)
-account_sid = "AC027d88dda5af03e1732f895465dc6273"
-auth_token = "ab0276371eca7229074be29439beb392"
+# account_sid = "AC027d88dda5af03e1732f895465dc6273"
+# auth_token = "ab0276371eca7229074be29439beb392"
 
     
 client = Twilio::REST::Client.new(account_sid,auth_token)

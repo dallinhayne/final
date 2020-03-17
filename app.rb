@@ -20,7 +20,7 @@ after { puts; }                                                                 
 # auth_token = "ab0276371eca7229074be29439beb392"
 
     
-client = Twilio::REST::Client.new(account_sid,auth_token)
+# client = Twilio::REST::Client.new(account_sid,auth_token)
 
 locations_table = DB.from(:locations)
 reviews_table = DB.from(:reviews)
@@ -31,7 +31,7 @@ before do
 end
 
 
-# homepage and list of events (aka "index")
+
 get "/" do
     puts "params: #{params}"
 
@@ -41,7 +41,6 @@ get "/" do
 
 end
 
-# event details (aka "show")
 get "/locations/:id" do
     puts "params: #{params}"
 
@@ -61,7 +60,7 @@ get "/locations/:id" do
     view "location"
 end
 
-# display the rsvp form (aka "new")
+
 get "/locations/:id/reviews/new" do
     puts "params: #{params}"
 
@@ -69,24 +68,24 @@ get "/locations/:id/reviews/new" do
     view "new_review"
 end
 
-# receive the submitted rsvp form (aka "create")
+
 post "/locations/:id/reviews/create" do
     puts "params: #{params}"
 
-    # first find the event that rsvp'ing for
+   
     @location = locations_table.where(id: params[:id]).to_a[0]
-    # next we want to insert a row in the rsvps table with the rsvp form data
+ 
     reviews_table.insert(
         location_id: @location[:id],
         user_id: session["user_id"],
         comments: params["comments"],
         going: params["going"]
     )
-      client.messages.create(
- from: "+12064663374", 
- to: "+18584723202",
- body: "Thanks for leaving us a review!"
-)
+#       client.messages.create(
+#  from: "+12064663374", 
+#  to: "+18584723202",
+#  body: "Thanks for leaving us a review!"
+# )
     redirect "locations/#{@location[:id]}"
   
 end
@@ -125,12 +124,12 @@ get "/reviews/:id/destroy" do
     view "destroy_review"
 end
 
-# display the signup form (aka "new")
+
 get "/users/new" do
     view "new_user"
 end
 
-# receive the submitted signup form (aka "create")
+
 post "/users/create" do
     puts "params: #{params}"
 
@@ -147,21 +146,21 @@ post "/users/create" do
 end
 end
 
-# display the login form (aka "new")
+
 get "/logins/new" do
     view "new_login"
 end
 
-# receive the submitted login form (aka "create")
+
 post "/logins/create" do
     puts "params: #{params}"
 
-    # step 1: user with the params["email"] ?
+    
     @user = users_table.where(email: params["email"]).to_a[0]
     if @user
-        # step 2: if @user, does the encrypted password match?
+      
         if BCrypt::Password.new(@user[:password]) == params["password"]
-            # set encrypted cookie for logged in user
+           
             session["user_id"] = @user[:id]
             view "create_login"
         else
@@ -172,9 +171,9 @@ post "/logins/create" do
     end
 end
 
-# logout user
+
 get "/logout" do
-    # remove encrypted cookie for logged out user
+ 
     session["user_id"] = nil
     redirect "/logins/new"
 end

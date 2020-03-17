@@ -9,9 +9,9 @@
         <% for review in @reviews %>
             <div class="media">
                 <% if review[:going] %>
-                    <i class="fas fa-thumbs-up fa-3x mr-3"></i>
+                    <i class="fas fa-home fa-2x mr-3"></i>
                 <% else %>
-                    <i class="fas fa-thumbs-down fa-3x mr-3"></i>
+                    <i class="fas fa-suitcase-rolling fa-2x mr-3"></i>
                 <% end %>
                 <div class="media-body">
                     <h5 class="mt-0">
@@ -34,6 +34,15 @@
                 </div>
             </div>
         <% end %>
+        <p></p>
+<p></p>
+<p></p>
+<p></p>
+
+        <h8>Local Customer = <i class="fas fa-home mr-3"></i></h8>
+        <h8>Traveling Customer = <i class="fas fa-suitcase-rolling mr-3"></i></h8>
+         
+
         <p class="mt-5">
             <% if @current_user %>
                 <a href="/locations/<%= @location[:id] %>/reviews/new" class="btn btn-primary">Leave a review now!</a>
@@ -44,17 +53,19 @@
     </div>
     </p>  
       <iframe
-        width="600"
-        height="450"
+        width="300"
+        height="225"
         frameborder="0" style="border:0"
         src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCtovsQvkIUWlNqtYwXY87gEd4ZSmJEhMw
           &q=<%= @lat %>,<%= @long %>&zoom=12" allowfullscreen>
       </iframe>
 
     <div class="col-sm-3">
-        <h3>Average Client Rating</h3>
-        <p><%= @location[:average_rating] %></p>
-        <h3>Address</h3>
+  <h5>Our Address:</h5>
         <p><%= @location[:address] %></p>
+        <h5>Average Client Rating:</h5>
+        <p><%= @location[:average_rating] %></p>
     </div>
 </div>
+
+<hr>

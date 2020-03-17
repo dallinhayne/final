@@ -32,11 +32,16 @@ locations_table = DB.from(:locations)
 locations_table.insert(title: "Las Vegas Center for Autism", 
                     description: "Our flagship location specializes in care for autistic children and teenagers.",
                     average_rating: "4.5/5.0 stars",
-                    address: "2142 Lake Mead Blvd Las Vegas, NV 84902")
+                    address: "3950 S Las Vegas Blvd, Las Vegas, NV 89119")
 
 locations_table.insert(title: "San Diego Center for Behavioral Therapy", 
                     description: "Our SD location is our largest, with capacity for 100 students.",
                     average_rating: "4.8/5.0 stars",
-                    address: "808 Beach Dr San Diego, CA 92119")
+                    address: "100 Park Blvd, San Diego, CA 92101")
+                   
+locations_table.insert(title: "Children's Center of Chicago", 
+                    description: "Our Midwest location has 20 highly trained BCBA's, focused on improving behavioral planning.",
+                    average_rating: "4.6/5.0 stars",
+                    address: "2211 Campus Dr, Evanston, IL 60208")
 
 puts "Success!"

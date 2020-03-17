@@ -17,17 +17,11 @@ after { puts; }                                                                 
 
 # put your API credentials here (found on your Twilio dashboard)
 account_sid = "AC027d88dda5af03e1732f895465dc6273"
-auth_token = "e1da808329a04d843c3dcb80ecb0049d"
-
-# set up a client to talk to the Twilio REST API
+auth_token = "ab0276371eca7229074be29439beb392"
 
     
 client = Twilio::REST::Client.new(account_sid,auth_token)
 
-# send the SMS from your trial Twilio number to your verified non-Twilio number
-
-# Dark Sky API
-# ForecastIO.api_key = "ab3fcb9996e6bdbb5bf3ca59bde5a725"
 locations_table = DB.from(:locations)
 reviews_table = DB.from(:reviews)
 users_table = DB.from(:users)

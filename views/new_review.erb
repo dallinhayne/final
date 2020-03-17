@@ -1,9 +1,6 @@
-<h2>
-    <i class="fas fa-map-pin"></i>
-    <%= @location[:date] %>
-</h2>
-
- <h1>Please rate your experience at <%= @location[:title] %></h1>
+<h3>
+    <i class="fas fa-child"></i>
+Please rate your experience at <%= @location[:title] %></h3>
   <span class="starRating">
   <input id="rating5" type="radio" name="rating" value="5/5 - Exceptional">
   <label for="rating5">5/5 - Exceptional</label>
@@ -12,12 +9,15 @@
   <input id="rating3" type="radio" name="rating" value="3/5 - Good">
   <label for="rating3">3/5 - Good</label>
   <input id="rating2" type="radio" name="rating" value="2/5 - Below Average">
-  <label for="rating2">2/5 - You're Losin' Me</label>
+  <label for="rating2">2/5 - Below Average</label>
   <input id="rating1" type="radio" name="rating" value="1/5 - Terrible">
-  <label for="rating1">1/5 - Not Coming Back</label>
+  <label for="rating1">1/5 - Poor</label>
 </span>
 
-<h1>Leave a review! Your feedback helps us improve.</h1>
+<p></p>
+<p></p>
+
+<h4>Leave a review! Your feedback helps us improve.</h4>
 
 <form action="/locations/<%= @location[:id] %>/reviews/create" method="post">
   <div class="form-group">

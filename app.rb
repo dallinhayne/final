@@ -16,11 +16,9 @@ after { puts; }                                                                 
 #######################################################################################
 
 # put your API credentials here (found on your Twilio dashboard)
-# account_sid = "AC027d88dda5af03e1732f895465dc6273"
-# auth_token = "ab0276371eca7229074be29439beb392"
 
     
-# client = Twilio::REST::Client.new(account_sid,auth_token)
+client = Twilio::REST::Client.new(ENV["ACCOUNT_SID"],ENV["AUTH_TOKEN"])
 
 locations_table = DB.from(:locations)
 reviews_table = DB.from(:reviews)
@@ -81,11 +79,11 @@ post "/locations/:id/reviews/create" do
         comments: params["comments"],
         going: params["going"]
     )
-#       client.messages.create(
-#  from: "+12064663374", 
-#  to: "+18584723202",
-#  body: "Thanks for leaving us a review!"
-# )
+      client.messages.create(
+ from: "+12064663374", 
+ to: "+18584723202",
+ body: "Thanks for leaving us a review!"
+)
     redirect "locations/#{@location[:id]}"
   
 end
@@ -102,7 +100,7 @@ post "/reviews/:id/update" do
     puts "params: #{params}"
  @review = reviews_table.where(id: params["id"]).to_a[0]
  @locations = locations_table.where(id: @review[:location_id]).to_a[0]
- if @current_user && @current_user[:id] == @review[:id]
+ if @current_user && @current_user[:id] == @review[:user_id]
  reviews_table.where(id: params["id"]).update(
      going: params["going"],
      comments: params["comments"]

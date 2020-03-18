@@ -3,7 +3,7 @@
 </h2>
 <h1>Edit review for <%= @location[:title] %></h1>
 
-<form action="/locations/<%= @location[:id] %>/reviews/create" method="post">
+<form action= "/reviews/<%= @review[:id] %>/update" method="post">
   <div class="form-group">
     <label>Is this location in your home region?</label>
     <select class="form-control" name="going">
